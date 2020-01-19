@@ -1,8 +1,10 @@
 require('./config/config');
 
-const express = require('express');
+const express = require('express'); //Libreria Express
+const mongoose = require('mongoose'); // Libreria mongoose
+
 const app = express();
-const bodyParser = require('body-parser');
+const bodyParser = require('body-parser'); // libreria bodyParser
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -10,39 +12,18 @@ app.use(bodyParser.urlencoded({ extended: false }))
 // parse application/json
 app.use(bodyParser.json())
 
-// metodo get
-app.get('/usuario', function(req, res) {
-    res.json('get Usuario');
-});
+app.use(require('./routes/usuario')); // importa la ruta de usuarios.
 
-// metodo post
-app.post('/usuario', function(req, res) {
 
-    let body = req.body;
+mongoose.connect(process.env.URLDB, { useNewUrlParser: true, useCreateIndex: true }, (err, res) => {
 
-    if (body.nombre === undefined) {
-        res.status(400).json({
-            ok: false,
-            mensage: 'El nombre es necesario'
-        })
-    }
-    res.json({
-        persona: body
-    });
-});
+    if (err) throw err;
 
-// metodo put
-app.put('/usuario/:id', function(req, res) {
-    let id = req.params.id;
+    console.log('Database is connected');
 
-    res.json({
-        id
-    });
-});
 
-// metodo delete
-app.delete('/usuario', function(req, res) {
-    res.json('delete Usuario');
+
+
 });
 
 app.listen(process.env.PORT, () => {
