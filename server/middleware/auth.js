@@ -14,7 +14,8 @@ let tokenAuth = (req, res, next) => {
 
             return res.status(401).json({
                 ok: false,
-                err
+                err,
+                tk: process.env.TOKEN_SEED
             });
         }
 

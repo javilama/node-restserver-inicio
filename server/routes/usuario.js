@@ -7,7 +7,7 @@ const app = express(); //inicializa la libreria express
 
 
 //metodo get (buscar)
-app.get('/usuario', (req, res) => {
+app.get('/usuario', tokenAuth, (req, res) => {
     // res.json('get Usuario LOCAL!!');
     let since = req.query.since || 0; // Se declara variable que maneja la funcion skip()
     since = Number(since);

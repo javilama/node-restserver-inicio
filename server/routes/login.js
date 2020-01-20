@@ -45,13 +45,13 @@ app.post('/login', (req, res) => {
 
         }
         //Genera token usando la libreria jsonwebtoken
-        // let token = jwt.sign({
-        //     usuario: usuarioDB
-        // }, process.env.TOKEN_SEED, { expiresIn: process.env.EXP_TOKEN }); // configuracion del "secret" y el expiracion del token (segundos, minutos,horas,dias)
+        let token = jwt.sign({
+            usuario: usuarioDB
+        }, process.env.TOKEN_SEED, { expiresIn: process.env.EXP_TOKEN }); // configuracion del "secret" y el expiracion del token (segundos, minutos,horas,dias)
         res.json({
             ok: true,
             usuario: usuarioDB,
-            //token: '123'
+            token: token
         })
 
     });
