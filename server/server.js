@@ -11,11 +11,12 @@ app.use(bodyParser.urlencoded({ extended: false }))
 
 // parse application/json
 app.use(bodyParser.json())
+    //Configuracion global de rutas
+app.use(require('./routes/index')); // importa todas las rutas configuradas en index.js
 
-app.use(require('./routes/usuario')); // importa la ruta de usuarios.
 
-
-mongoose.connect(process.env.URLDB, { useNewUrlParser: true, useCreateIndex: true }, (err, res) => {
+//Conexion a la BD en Mongo usando la libreria mongoose
+mongoose.connect(process.env.URLDB, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true }, (err, res) => {
 
     if (err) throw err;
 

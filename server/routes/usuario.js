@@ -2,9 +2,12 @@ const express = require('express'); //Libreria Express
 const bcrypt = require('bcrypt'); // Importa bcrypt plugin
 const _ = require('underscore'); //Importa libreria undercore instalada.
 const Usuario = require('../models/usuario'); //Se importa el Schema usuario
+const { tokenAuth } = require('../middleware/auth'); // se importan middlewares personalizados 
 const app = express(); //inicializa la libreria express
 
-app.get('/usuario', function(req, res) {
+
+//metodo get (buscar)
+app.get('/usuario', (req, res) => {
     // res.json('get Usuario LOCAL!!');
     let since = req.query.since || 0; // Se declara variable que maneja la funcion skip()
     since = Number(since);
@@ -39,8 +42,8 @@ app.get('/usuario', function(req, res) {
 
 
 });
-// metodo post
-app.post('/usuario', function(req, res) {
+// metodo post (crear)
+app.post('/usuario', (req, res) => {
 
     let body = req.body;
 
@@ -80,8 +83,8 @@ app.post('/usuario', function(req, res) {
     // });
 });
 
-// metodo put
-app.put('/usuario/:id', function(req, res) {
+// metodo put(actualizar)
+app.put('/usuario/:id', (req, res) => {
     let id = req.params.id;
     // let body = _.pick(req.body, [nombre, email, password, img, role, estado]);
     let body = req.body;
@@ -105,8 +108,8 @@ app.put('/usuario/:id', function(req, res) {
 
 });
 
-// metodo delete
-app.delete('/usuario/:id', function(req, res) {
+// metodo delete(eliminar)
+app.delete('/usuario/:id', (req, res) => {
     // res.json('delete Usuario');
     let id = req.params.id;
     let cambioEstado = {
