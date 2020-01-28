@@ -2,10 +2,23 @@ const express = require('express'); //Libreria Express
 const Photo = require('../models/photos'); // Se importa el schema photos
 const fs = require('fs'); //importa la libreria fileSystem de node
 const path = require('path'); //importa la libreria path para generar y gestionar rutas de archivos
-const Upload = require('./upload');
 const app = express(); //inicializa la libreria express
 //const Usuario = require('../models/usuario'); //Se importa el Schema usuario
+app.get('/photo/:img', (req, res) => {
 
+    let img = req.params.img;
+
+
+    let imgPath = path.resolve(__dirname, `../../uploads/photos/${img}`);
+    if (fs.existsSync(imgPath)) {
+        res.sendFile(imgPath);
+    } else {
+
+        let notImagePath = path.resolve(__dirname, '../assets/notImage.jpg');
+        res.sendFile(notImagePath);
+    }
+
+});
 
 app.post('/photo', (req, res) => {
     // let dateTime = new Date();
