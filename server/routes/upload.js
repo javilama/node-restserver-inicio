@@ -13,6 +13,8 @@ app.use(fileUpload());
 app.post('/upload/:tipo/:id', (req, res) => {
 
     let tipo = req.params.tipo;
+
+    console.log(tipo)
     let id = req.params.id;
 
     if (!req.files) {
