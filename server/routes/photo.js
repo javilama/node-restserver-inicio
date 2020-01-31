@@ -34,9 +34,9 @@ app.get('/photo', async(req, res) => {
             Photo.countDocuments({}, (err, count) => {
 
                 res.json({
-                    ok: true,
-                    photos,
-                    count
+                    // ok: true,
+                    photos
+                    // count
                 });
             })
 
@@ -102,17 +102,17 @@ app.post('/photo', upload, (req, res) => {
         date: new Date().toDateString(),
         img: req.file.filename
     });
-    if (!req.file) {
+    // if (!req.file) {
 
-        return res.status(400).json({
+    //     return res.status(400).json({
 
-            ok: false,
-            err: {
-                message: 'no se ha seleccionado ninguna imagen'
-            }
-        });
-    }
-    photo.save((err, photoDB) => {
+    //         ok: false,
+    //         err: {
+    //             message: 'no se ha seleccionado ninguna imagen'
+    //         }
+    //     });
+    // }
+    photo.save((err, photo) => {
 
         if (err) {
             return res.status(400).json({
@@ -123,7 +123,7 @@ app.post('/photo', upload, (req, res) => {
         }
         res.json({
             ok: true,
-            photo: photoDB
+            photo
         });
 
     });
